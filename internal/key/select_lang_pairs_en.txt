@@ -1,0 +1,22 @@
+Please select the source language and the target language:
+
+Source Language: The language you are typing in.
+Target Language: The language you want your text to be translated into.
+
+Please note that the source and target languages must be in the list below:
+
+Persian        =    fa
+English        =    en
+Arabic          =    ar
+Spanish       =    es
+French         =    fr
+German       =    de
+
+To enter the source and target languages, follow the example:
+
+If you want to type in Persian and have it translated into English (Source Language: Persian, Target Language: English)
+
+You should enter it like this:  /fa-en 
+
+Important: Be sure to separate the source and target languages with a hyphen (( - )) without any spaces.
+
