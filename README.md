@@ -4,7 +4,7 @@
 Essential Translate Bot is a Telegram bot that provides real-time inline message translation. After configuring the bot with the desired source and target languages, users can mention the bot in any chat or group to translate their messages automatically.
 
 ## Features
-- **Inline Translation**: Translate messages in real-time by mentioning the bot (`@essential_translate_bot`) in any chat.
+- **Inline Translation**: Translate messages in real-time by mentioning the bot (`@essential_translate_bot`) in any chat or group.
 - **Flexible Language Settings**: Users can configure the source and target languages for translation by sending a command like `/fa-en`.
 - **Bot Language Settings**: Change the bot's interface language between Persian and English.
 - **Simple and Intuitive UI**: Navigate through the bot using buttons for easy interaction.
