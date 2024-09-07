@@ -22,6 +22,7 @@ Essential Translate Bot is a Telegram bot that provides real-time inline message
 - **Finish Settings**: Complete the setup and activate the translation feature.
 
 ## Getting Started
+
 ### Prerequisites
 - Go (version 1.6 or higher)
 - A Telegram Bot API Token (create one via [BotFather](https://core.telegram.org/bots#botfather))
