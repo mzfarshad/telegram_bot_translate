@@ -43,7 +43,7 @@ func (b *Bot) inlineQueryHandle(userID int, inlineQuery *tgbotapi.InlineQuery) {
 		result := tgbotapi.NewInlineQueryResultArticle(
 			generateUniqueID(userID),
 			"Translate",
-			translateText,
+			queryText+"\n"+translateText,
 		)
 
 		results := []interface{}{result}
