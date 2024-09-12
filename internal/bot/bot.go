@@ -3,6 +3,7 @@ package bot
 import (
 	"fmt"
 	"log"
+	"strings"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	"github.com/mzfarshad/tlg_bot/internal/key"
@@ -86,6 +87,7 @@ func (b *Bot) handleUpdate(update tgbotapi.Update) {
 		// Process commands in the message
 		if msg.IsCommand() {
 			cmd := msg.Command()
+			cmd = strings.ToLower(cmd)
 			if cmd == string(key.StartHandler) {
 
 				// Handle the /start command
