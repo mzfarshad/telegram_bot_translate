@@ -12,7 +12,7 @@ import (
 // It loads environment variables from the .env file.
 // If the file is not found, the program will terminate with a fatal error.
 func init() {
-	if err := godotenv.Load("../.env"); err != nil {
+	if err := godotenv.Load("/app/.env"); err != nil {
 		log.Fatal("failed to load .env file")
 	}
 }

@@ -1,0 +1,11 @@
+version: '3.3'
+services:
+  translate-bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .env:/app/.env
+      - ./internal/key:/app/internal/key
+      - ./internal/help:/app/internal/help
+    command: ["./translate-bot"]

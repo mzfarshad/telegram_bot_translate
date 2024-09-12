@@ -162,9 +162,9 @@ func (m *TranslateSelectLanguagePairsMenu) ShowMenu(userID int, chatID int64, la
 
 	var path string
 	if lang == key.LangEN {
-		path = "../internal/key/select_lang_pairs_en.txt"
+		path = "internal/key/select_lang_pairs_en.txt"
 	} else {
-		path = "../internal/key/select_lang_pairs_fa.txt"
+		path = "internal/key/select_lang_pairs_fa.txt"
 	}
 
 	msg, err := key.ReadSelectLanguagePairsMsg(path)
@@ -226,9 +226,9 @@ func (m *HelpMenu) ShowMenu(userID int, chatID int64, lang key.Language) {
 	var helpFilePath string
 
 	if lang == "en" {
-		helpFilePath = "../internal/help/help_en.txt"
+		helpFilePath = "internal/help/help_en.txt"
 	} else {
-		helpFilePath = "../internal/help/help_fa.txt"
+		helpFilePath = "internal/help/help_fa.txt"
 	}
 
 	helpText, err := help.ReadHelpFile(helpFilePath)
