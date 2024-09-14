@@ -7,7 +7,7 @@ settings. This allows you to send messages in your desired language in any chat 
 part of.
 
 After configuring the settings, enter the chat or group you want to use. Then, by typing the bot's
-username as “ @essential_translate_bot “ followed by a space and your desired text, wait for a few
+username as “ @TranslateGoBot “ followed by a space and your desired text, wait for a few
 seconds (about 2 to 3 seconds). The " Translate " option will appear above the typing area.
 Click on it, and the bot will automatically translate your text and
 send it in the target language.

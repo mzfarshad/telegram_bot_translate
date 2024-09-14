@@ -26,6 +26,7 @@ func CreateHandlerManager(bot *Bot) *HandlerManager {
 	hm.rigesterHandler(string(key.KeyResetTranslationSetting), &TranslateResetSetting{bot: bot})
 	hm.rigesterHandler(string(key.KeyResetTranslateYes), &TranslationResetSettingYes{bot: bot})
 	hm.rigesterHandler(string(key.KeyHelp), &HelpHandler{bot: bot})
+	hm.rigesterHandler(string(key.KeyContactUs), &ContactUsHandler{bot: bot})
 
 	return hm
 }
@@ -247,5 +248,17 @@ func (h *HelpHandler) Handle(chatID int64, callback *tgbotapi.CallbackQuery, lan
 
 	userID := callback.From.ID
 	h.bot.MenuManager.menuInteraction(int(userID), chatID, string(key.MenuHelp), lang)
+	h.bot.MenuManager.menuInteraction(int(userID), chatID, string(key.MenuMain), lang)
+}
+
+type ContactUsHandler struct {
+	bot *Bot
+}
+
+func (h *ContactUsHandler) Handle(chatID int64, callback *tgbotapi.CallbackQuery, lang key.Language) {
+
+	userID := callback.From.ID
+
+	h.bot.MenuManager.menuInteraction(int(userID), chatID, string(key.MenuContactUs), lang)
 	h.bot.MenuManager.menuInteraction(int(userID), chatID, string(key.MenuMain), lang)
 }

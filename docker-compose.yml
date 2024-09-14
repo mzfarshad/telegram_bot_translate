@@ -8,4 +8,5 @@ services:
       - .env:/app/.env
       - ./internal/key:/app/internal/key
       - ./internal/help:/app/internal/help
+      - ./internal/contactus:/app/internal/contactus
     command: ["./translate-bot"]

@@ -4,6 +4,7 @@ import (
 	"log"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
+	"github.com/mzfarshad/tlg_bot/internal/contactus"
 	"github.com/mzfarshad/tlg_bot/internal/help"
 	"github.com/mzfarshad/tlg_bot/internal/key"
 )
@@ -22,6 +23,7 @@ func CreateMenuManager(bot *Bot) *MenuManager {
 	menus.rigesterMenu(string(key.MenuFinishTranslateSetup), &TranslationFinishMenu{bot: bot})
 	menus.rigesterMenu(string(key.MenuResetTranslate), &TranslationResetTranslateMenu{bot: bot})
 	menus.rigesterMenu(string(key.MenuHelp), &HelpMenu{bot: bot})
+	menus.rigesterMenu(string(key.MenuContactUs), &ContactUsMenu{bot: bot})
 
 	return menus
 }
@@ -241,4 +243,18 @@ func (m *HelpMenu) ShowMenu(userID int, chatID int64, lang key.Language) {
 
 	m.bot.API.Send(message)
 
+}
+
+type ContactUsMenu struct {
+	bot *Bot
+}
+
+func (m *ContactUsMenu) ShowMenu(userID int, chatID int64, lang key.Language) {
+
+	contact_us, err := contactus.ReadContactUsFile("internal/contactus/contact.txt")
+	if err != nil {
+		log.Println(err)
+	}
+	message := tgbotapi.NewMessage(chatID, contact_us)
+	m.bot.API.Send(message)
 }

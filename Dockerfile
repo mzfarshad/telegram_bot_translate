@@ -23,5 +23,6 @@ COPY .env /app/.env
 # Copy the specific directories containing .txt files
 COPY internal/key /app/internal/key
 COPY internal/help /app/internal/help
+COPY internal/contactus /app/internal/contactus
 
 CMD ["./translate-bot"]

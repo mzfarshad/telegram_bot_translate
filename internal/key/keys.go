@@ -47,17 +47,10 @@ const (
 	MenuFinishTranslateSetup     MenuState = "finishTranslateSetup"
 	MenuResetTranslate           MenuState = "resetTranslate"
 	MenuHelp                     MenuState = "help"
+	MenuContactUs                MenuState = "contactUs"
 
 	// Handler names
 	StartHandler HandlerName = "start"
-
-	//Language pairs
-	// EN_FA TextButton = "en-fa"
-	// FA_EN TextButton = "fa-en"
-	// FA_AR TextButton = "fa-ar"
-	// AR_FA TextButton = "ar-fa"
-	// EN_AR TextButton = "en-ar"
-	// AR_EN TextButton = "ar-en"
 )
 
 // Map of button texts for different languages
@@ -72,13 +65,7 @@ var Buttons = map[Language]map[TextButton]string{
 		KeyTranslateSentMessage:    "Translate Sent Message",
 		KeyResetTranslationSetting: "Reset Translation Settings",
 		KeyFinishSetup:             "Finish Setup",
-		// EN_AR:                      "English to Arabic",
-		// EN_FA:                      "English to Persian",
-		// FA_AR:                      "Persian to Arabic",
-		// FA_EN:                      "Persian to English",
-		// AR_EN:                      "Arabic to English",
-		// AR_FA:                      "Arabic to Persian",
-		KeyResetTranslateYes: "Yes",
+		KeyResetTranslateYes:       "Yes",
 	},
 	LangFA: {
 		KeyTranslaion:              "ترجمه",
@@ -90,13 +77,7 @@ var Buttons = map[Language]map[TextButton]string{
 		KeyTranslateSentMessage:    "ترجمه پیام های ارسالی",
 		KeyResetTranslationSetting: "بازنشانی تنظیمات ترجمه",
 		KeyFinishSetup:             "اتمام تنظیمات",
-		// EN_AR:                      "انگلیسی به عربی",
-		// EN_FA:                      "انگلیسی به فارسی",
-		// FA_AR:                      "فارسی به عربی",
-		// FA_EN:                      "فارسی به انگلیسی",
-		// AR_EN:                      "عربی به انگلیسی",
-		// AR_FA:                      "عربی به فارسی",
-		KeyResetTranslateYes: "بله",
+		KeyResetTranslateYes:       "بله",
 	},
 }
 
