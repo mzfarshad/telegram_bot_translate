@@ -25,4 +25,6 @@ COPY internal/key /app/internal/key
 COPY internal/help /app/internal/help
 COPY internal/contactus /app/internal/contactus
 
+EXPOSE 7171
+
 CMD ["./translate-bot"]

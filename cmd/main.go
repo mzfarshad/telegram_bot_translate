@@ -2,7 +2,10 @@ package main
 
 import (
 	"log"
+	"net/http"
 
+	"github.com/gin-gonic/gin"
+	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	"github.com/mzfarshad/tlg_bot/internal/bot"
 	"github.com/mzfarshad/tlg_bot/internal/config"
 )
@@ -37,6 +40,22 @@ func main() {
 
 	log.Printf("Authorized on account %s", bot.API.Self.UserName)
 
-	// Start the bot to begin handling updates and commands.
-	bot.Start()
+	router := gin.Default()
+
+	router.POST("/webhook", func(ctx *gin.Context) {
+		var update tgbotapi.Update
+
+		if err := ctx.ShouldBindJSON(&update); err != nil {
+			log.Printf("error parsing update: %v\n", err)
+			ctx.JSON(http.StatusBadRequest, gin.H{"error": "invalid request"})
+		}
+
+		bot.HandleUpdate(update)
+
+		ctx.JSON(http.StatusOK, gin.H{"status": "ok"})
+	})
+
+	if err := router.Run(":7171"); err != nil {
+		log.Fatalf("error starting server: %v", err)
+	}
 }

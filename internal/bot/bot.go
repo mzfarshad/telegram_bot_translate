@@ -48,24 +48,24 @@ func NewBot(tkn string) (*Bot, error) {
 
 // Start begins polling for updates from Telegram and processes each update.
 
-func (b *Bot) Start() {
+// func (b *Bot) Start() {
 
-	// Create an Update configuration with a timeout of 60 seconds
-	u := tgbotapi.NewUpdate(0)
-	u.Timeout = 60
+// 	// Create an Update configuration with a timeout of 60 seconds
+// 	u := tgbotapi.NewUpdate(0)
+// 	u.Timeout = 60
 
-	// Get a channel of updates from the Telegram API
-	updates := b.API.GetUpdatesChan(u)
+// 	// Get a channel of updates from the Telegram API
+// 	updates := b.API.GetUpdatesChan(u)
 
-	// Process each update received
-	for update := range updates {
-		b.handleUpdate(update)
-	}
-}
+// 	// Process each update received
+// 	for update := range updates {
+// 		b.HandleUpdate(update)
+// 	}
+// }
 
 // handleUpdate processes incoming updates from Telegram, including messages and callback queries.
 
-func (b *Bot) handleUpdate(update tgbotapi.Update) {
+func (b *Bot) HandleUpdate(update tgbotapi.Update) {
 
 	var chatID int64
 	var msg *tgbotapi.Message

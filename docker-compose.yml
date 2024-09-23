@@ -10,3 +10,5 @@ services:
       - ./internal/help:/app/internal/help
       - ./internal/contactus:/app/internal/contactus
     command: ["./translate-bot"]
+    ports:
+      - "7171:7171"
