@@ -3,7 +3,6 @@ package main
 import (
 	"log"
 
-	"github.com/joho/godotenv"
 	"github.com/mzfarshad/tlg_bot/internal/bot"
 	"github.com/mzfarshad/tlg_bot/internal/config"
 )
@@ -11,11 +10,11 @@ import (
 // init function is executed before the main function.
 // It loads environment variables from the .env file.
 // If the file is not found, the program will terminate with a fatal error.
-func init() {
-	if err := godotenv.Load("/app/.env"); err != nil {
-		log.Fatal("failed to load .env file")
-	}
-}
+// func init() {
+// 	if err := godotenv.Load("/app/.env"); err != nil {
+// 		log.Fatal("failed to load .env file")
+// 	}
+// }
 
 func main() {
 
