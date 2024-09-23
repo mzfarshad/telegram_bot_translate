@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - .env:/app/.env
+      #- .env:/app/.env
       - ./internal/key:/app/internal/key
       - ./internal/help:/app/internal/help
       - ./internal/contactus:/app/internal/contactus
