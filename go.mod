@@ -8,7 +8,7 @@ require github.com/go-telegram-bot-api/telegram-bot-api/v5 v5.5.1
 
 require github.com/mattn/go-sqlite3 v1.14.22
 
-require github.com/joho/godotenv v1.5.1
+require github.com/gin-gonic/gin v1.10.0
 
 require (
 	github.com/bytedance/sonic v1.12.3 // indirect
@@ -17,7 +17,6 @@ require (
 	github.com/cloudwego/iasm v0.2.0 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.5 // indirect
 	github.com/gin-contrib/sse v0.1.0 // indirect
-	github.com/gin-gonic/gin v1.10.0 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
 	github.com/go-playground/validator/v10 v10.22.1 // indirect

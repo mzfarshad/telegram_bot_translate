@@ -55,6 +55,10 @@ func main() {
 		ctx.JSON(http.StatusOK, gin.H{"status": "ok"})
 	})
 
+	router.GET("/", func(ctx *gin.Context) {
+		ctx.String(200, "Welcome to Translate Bot")
+	})
+
 	if err := router.Run(":7171"); err != nil {
 		log.Fatalf("error starting server: %v", err)
 	}
