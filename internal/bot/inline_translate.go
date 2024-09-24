@@ -17,6 +17,11 @@ func (b *Bot) inlineQueryHandle(userID int, inlineQuery *tgbotapi.InlineQuery) {
 
 	log.Println("Query Text:", queryText)
 
+	if queryText == "" {
+		log.Printf("Received empty query from userID: %d", userID)
+		return
+	}
+
 	setting, err := storange.GetTranslationSetting(userID)
 	if err != nil {
 		log.Printf("inline query: %v, UserID: %d", err, userID)
