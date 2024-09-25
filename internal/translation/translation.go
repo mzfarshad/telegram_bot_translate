@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"html"
 	"io"
+	"log"
 	"net/http"
 	"net/url"
 	"strconv"
@@ -105,8 +106,9 @@ func TranslateText(sourceText, sourceLang, targetLang string) (string, error) {
 			return "", fmt.Errorf("no valid translation found")
 		}
 	}
-
+	log.Println("best translate text before html: ", bestTranslation)
 	bestTranslation = html.UnescapeString(bestTranslation)
+	log.Println("best translate text after html: ", bestTranslation)
 
 	return bestTranslation, nil
 }
