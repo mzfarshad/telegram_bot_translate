@@ -13,7 +13,7 @@ RUN go mod tidy
 RUN go build -o translate-bot ./cmd
 
 # Stage 2: Final
-FROM alpine:3.19
+FROM alpine:3.18
 LABEL MAINTAINER=" Author <farshad.akbari.arzati@gmail.com>"
 
 WORKDIR /app
