@@ -52,7 +52,7 @@ func processMatchQuality(rawQuality json.RawMessage) (float64, error) {
 	return 0, fmt.Errorf("failed to parse quality field")
 }
 
-// Function translate text
+// Function translate text using MyMemory API
 func TranslateText(sourceText, sourceLang, targetLang string) (string, error) {
 	baseURL := "https://api.mymemory.translated.net/get"
 
@@ -83,9 +83,10 @@ func TranslateText(sourceText, sourceLang, targetLang string) (string, error) {
 	if err := json.Unmarshal(body, &result); err != nil {
 		return "", err
 	}
+
 	log.Println("result: ", result)
 	var bestTranslation string
-	var bestQuality float64
+	var bestScore float64
 
 	for _, match := range result.Matches {
 		quality, err := processMatchQuality(match.Quality)
@@ -93,32 +94,34 @@ func TranslateText(sourceText, sourceLang, targetLang string) (string, error) {
 			fmt.Println("Error processing quality:", err)
 			continue
 		}
-		log.Println("qulity is : ", quality)
+		log.Println("quality: ", quality)
 
-		if quality > bestQuality && len(match.Translation) > 0 && !containsWeirdCharacters(match.Translation) {
-			bestQuality = quality
+		// امتیازدهی بر اساس کیفیت، کلمات کلیدی و ساختار
+		score := scoreTranslation(sourceText, match.Translation, quality)
+		log.Println("Translation score: ", score)
+
+		if score > bestScore && len(match.Translation) > 0 && !containsWeirdCharacters(match.Translation) {
+			bestScore = score
 			bestTranslation = match.Translation
-			log.Println("translate text after qulity: ", bestTranslation)
+			log.Println("Best translation so far: ", bestTranslation)
 		}
 	}
 
 	if bestTranslation == "" {
 		bestTranslation = result.ResponseData.TranslatedText
-		log.Println("best translate in if 2: ", bestTranslation)
+		log.Println("Fallback translation: ", bestTranslation)
 		if bestTranslation == "" {
 			return "", fmt.Errorf("no valid translation found")
 		}
 	}
-	log.Println("best translate text before html: ", bestTranslation)
+
 	bestTranslation = html.UnescapeString(bestTranslation)
-	log.Println("best translate text after html: ", bestTranslation)
 
 	return bestTranslation, nil
 }
 
 // A function to detect unusual strings
 func containsWeirdCharacters(s string) bool {
-
 	// List of HTML characters to check
 	htmlChars := []string{"<", ">", "&", "\"", "'"}
 
@@ -135,4 +138,54 @@ func containsWeirdCharacters(s string) bool {
 	}
 
 	return false
+}
+
+// Scoring based on keywords
+func scoreTranslationByKeywords(sourceText, translatedText string) float64 {
+	keyWords := extractKeywords(sourceText)
+
+	matchedCount := 0
+	for _, word := range keyWords {
+		if strings.Contains(translatedText, word) {
+			matchedCount++
+		}
+	}
+
+	// Score based on keyword matches
+	return (float64(matchedCount) / float64(len(keyWords))) * 100
+}
+
+// Extracting keywords from the text
+func extractKeywords(text string) []string {
+	words := strings.Fields(text)
+	var keyWords []string
+	for _, word := range words {
+		if len(word) > 3 { // Choose words longer than three characters
+			keyWords = append(keyWords, word)
+		}
+	}
+	return keyWords
+}
+
+// Scoring based on sentence structure
+func scoreTranslationBySentenceStructure(sourceText, translatedText string) float64 {
+	sourceSentences := strings.Count(sourceText, ".") + strings.Count(sourceText, "!")
+	translatedSentences := strings.Count(translatedText, ".") + strings.Count(translatedText, "!")
+
+	// Scoring based on matching the number of sentences
+	if sourceSentences == 0 {
+		return 0
+	}
+	return (float64(translatedSentences) / float64(sourceSentences)) * 100
+}
+
+// Combination of scoring criteria
+func scoreTranslation(sourceText, translatedText string, quality float64) float64 {
+	keywordScore := scoreTranslationByKeywords(sourceText, translatedText)
+	structureScore := scoreTranslationBySentenceStructure(sourceText, translatedText)
+
+	// Combining points with weighting
+	finalScore := (0.4 * keywordScore) + (0.4 * structureScore) + (0.2 * quality)
+
+	return finalScore
 }
