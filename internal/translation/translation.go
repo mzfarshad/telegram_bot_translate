@@ -85,6 +85,11 @@ func TranslateText(sourceText, sourceLang, targetLang string) (string, error) {
 	}
 
 	log.Println("result: ", result)
+
+	// ذخیره ترجمه اولیه
+	initialTranslation := result.ResponseData.TranslatedText
+	initialQuality := 80.0 // می‌توانید این مقدار را تغییر دهید
+
 	var bestTranslation string
 	var bestScore float64
 
@@ -96,7 +101,7 @@ func TranslateText(sourceText, sourceLang, targetLang string) (string, error) {
 		}
 		log.Println("quality: ", quality)
 
-		// Scoring based on quality, keywords and structure
+		// امتیازدهی بر اساس کیفیت، کلمات کلیدی و ساختار
 		score := scoreTranslation(sourceText, match.Translation, quality)
 		log.Println("Translation score: ", score)
 
@@ -107,12 +112,10 @@ func TranslateText(sourceText, sourceLang, targetLang string) (string, error) {
 		}
 	}
 
-	if bestTranslation == "" {
-		bestTranslation = result.ResponseData.TranslatedText
-		log.Println("Fallback translation: ", bestTranslation)
-		if bestTranslation == "" {
-			return "", fmt.Errorf("no valid translation found")
-		}
+	// استفاده از ترجمه اولیه در صورت عدم وجود ترجمه بهتر
+	if bestTranslation == "" || bestScore < initialQuality {
+		bestTranslation = initialTranslation
+		log.Println("Using initial translation: ", bestTranslation)
 	}
 
 	bestTranslation = html.UnescapeString(bestTranslation)
