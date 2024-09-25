@@ -96,7 +96,7 @@ func TranslateText(sourceText, sourceLang, targetLang string) (string, error) {
 		}
 		log.Println("quality: ", quality)
 
-		// امتیازدهی بر اساس کیفیت، کلمات کلیدی و ساختار
+		// Scoring based on quality, keywords and structure
 		score := scoreTranslation(sourceText, match.Translation, quality)
 		log.Println("Translation score: ", score)
 
@@ -185,7 +185,7 @@ func scoreTranslation(sourceText, translatedText string, quality float64) float6
 	structureScore := scoreTranslationBySentenceStructure(sourceText, translatedText)
 
 	// Combining points with weighting
-	finalScore := (0.4 * keywordScore) + (0.4 * structureScore) + (0.2 * quality)
+	finalScore := (0.2 * keywordScore) + (0.3 * structureScore) + (0.5 * quality)
 
 	return finalScore
 }
