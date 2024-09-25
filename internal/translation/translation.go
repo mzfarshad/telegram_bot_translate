@@ -83,7 +83,7 @@ func TranslateText(sourceText, sourceLang, targetLang string) (string, error) {
 	if err := json.Unmarshal(body, &result); err != nil {
 		return "", err
 	}
-
+	log.Println("result: ", result)
 	var bestTranslation string
 	var bestQuality float64
 
@@ -93,15 +93,18 @@ func TranslateText(sourceText, sourceLang, targetLang string) (string, error) {
 			fmt.Println("Error processing quality:", err)
 			continue
 		}
+		log.Println("qulity is : ", quality)
 
 		if quality > bestQuality && len(match.Translation) > 0 && !containsWeirdCharacters(match.Translation) {
 			bestQuality = quality
 			bestTranslation = match.Translation
+			log.Println("translate text after qulity: ", bestTranslation)
 		}
 	}
 
 	if bestTranslation == "" {
 		bestTranslation = result.ResponseData.TranslatedText
+		log.Println("best translate in if 2: ", bestTranslation)
 		if bestTranslation == "" {
 			return "", fmt.Errorf("no valid translation found")
 		}
